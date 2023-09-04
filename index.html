@@ -10,13 +10,20 @@
 <body>
     <div class="container">
         <div class="weather-card">
-            <div class="weather-icon sun"></div>
             <h2><span id="cityName"></span></h2>
+            <div class="location-select-container">
+                <label for="locationSelect">Selecciona una ubicación:</label>
+                <select id="locationSelect">
+                    <option value="-33.68272565799198,-53.55610306188749">Dieciocho de Julio</option>
+                    <option value="-34.90328,-56.18816">Montevideo</option>
+                </select>
+            </div>
+            <div class="weather-icon" id="weatherIcon"></div>
             <p class="description" data-label="Descripción: "><span id="weatherDescription"></span></p>
             <p class="temperature" data-label="Temperatura: "><span id="temperature"></span>°C</p>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

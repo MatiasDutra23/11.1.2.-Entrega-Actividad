@@ -1,51 +1,60 @@
-// Espera a que la página HTML se cargue completamente
 document.addEventListener("DOMContentLoaded", function () {
-  //clave de la API
+  // Clave de la API
   const apiKey = '2a3d2f97b6ae7ee41823afe5ff7b33d9';
 
-  // Coordenadas de latitud y longitud de tu localidad (Puedes cambiar estas coordenadas para ver otra ubicación)
-  const latitude = -33.68272565799198; 
-  const longitude = -53.55610306188749;
+  // Obtener elementos del DOM
+  const locationSelect = document.getElementById('locationSelect');
+  const cityElement = document.getElementById('cityName');
+  const weatherDescriptionElement = document.getElementById('weatherDescription');
+  const temperatureElement = document.getElementById('temperature');
+  const weatherIconElement = document.querySelector('.weather-icon');
 
-  // URL de la API del clima con las coordenadas y la clave de API
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  // Escuchar cambios en el menú desplegable
+  locationSelect.addEventListener('change', function () {
+    // Obtener la latitud y longitud de la opción seleccionada
+    const selectedLocation = locationSelect.value.split(',');
+    const latitude = selectedLocation[0];
+    const longitude = selectedLocation[1];
 
-  
-  fetch(apiUrl)
-    .then(response => response.json()) // Convierte la respuesta en formato JSON
-    .then(data => {
-      const cityName = data.name; // Nombre de la ciudad
-      const temperatureKelvin = data.main.temp; // Temperatura en Kelvin
-      const weatherDescription = data.weather[0].description; // Descripción del clima
+    // URL de la API del clima con las nuevas coordenadas
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
 
-      // Convierte la temperatura de Kelvin a Celsius
-      const temperatureCelsius = temperatureKelvin - 273.15;
+    // Realizar la solicitud a la API
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const cityName = data.name;
+        const temperatureKelvin = data.main.temp;
+        const weatherDescription = data.weather[0].description;
 
-      // Selecciona los elementos del HTML donde mostraremos los datos del clima
-      const cityElement = document.getElementById('cityName');
-      const weatherDescriptionElement = document.getElementById('weatherDescription');
-      const temperatureElement = document.getElementById('temperature');
-      const weatherIconElement = document.querySelector('.weather-icon');
+        // Convierte la temperatura de Kelvin a Celsius
+        const temperatureCelsius = temperatureKelvin - 273.15;
 
-      // Muestra los datos del clima en la página web
-      cityElement.textContent = cityName;
-      weatherDescriptionElement.textContent = weatherDescription;
-      temperatureElement.textContent = temperatureCelsius.toFixed(2);
+        // Actualizar los elementos del HTML con los nuevos datos del clima
+        cityElement.textContent = cityName;
+        weatherDescriptionElement.textContent = weatherDescription;
+        temperatureElement.textContent = temperatureCelsius.toFixed(2);
 
-     // Remover todas las clases de icono de clima del elemento
-weatherIconElement.classList.remove('sun', 'cloud', 'light-rain', 'default-icon');
+        // Remover todas las clases de icono de clima del elemento
+        weatherIconElement.classList.remove('sun', 'cloud', 'light-rain', 'default-icon', 'overcast-clouds');
 
-// Asigna una clase de icono de clima según la descripción del clima
-if (weatherDescription.toLowerCase().includes('clear')) {
+       // Asignar una clase de icono de clima según la descripción del clima
+const lowercaseDescription = weatherDescription.toLowerCase();
+if (lowercaseDescription === 'clear') {
   weatherIconElement.classList.add('sun'); // Icono de sol
-} else if (weatherDescription.toLowerCase().includes('cloud')) {
+} else if (lowercaseDescription === 'cloud') {
   weatherIconElement.classList.add('cloud'); // Icono de nube
-} else if (weatherDescription.toLowerCase().includes('rain')) {
+} else if (lowercaseDescription === 'rain') {
   weatherIconElement.classList.add('light-rain'); // Icono de lluvia ligera
+} else if (lowercaseDescription === 'overcast clouds') {
+  weatherIconElement.classList.add('overcast-clouds'); // Icono para "overcast clouds"
 } else {
   weatherIconElement.classList.add('default-icon'); // Icono predeterminado
 }
 
+      });
+  });
 
-    });
+  // Disparar el evento 'change' para cargar la primera ubicación por defecto
+  locationSelect.dispatchEvent(new Event('change'));
 });
