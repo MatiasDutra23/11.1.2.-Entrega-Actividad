@@ -1,31 +1,205 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+
+/* Colores personalizados */
+:root {
+    --color1: #C8DAE6;
+    --color2: white;
+    --color3: #B8B8B8;
+    --color4: #FFCD41;
+    --color5: #2092A9;
+}
+
+/* Estilos generales para el cuerpo de la página */
 body {
+    background-color: var(--color1);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0; /* Color de fondo */
 }
 
 .container {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
+/* Estilos para las tarjetas de clima */
 .weather-card {
-    background-color: #fff; /* Color de fondo de la tarjeta */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px; /* Ancho máximo de la tarjeta */
-    margin: 0 auto; /* Centrar horizontalmente */
+    margin: 20px 5px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 270px;
+    height: 270px;
+    background-color: var(--color2);
+    box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+    animation: appear 500ms ease-out forwards;
 }
 
-h2 {
+/* Estilos para los títulos y descripciones */
+.weather-card h2 {
+    position: absolute;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     font-size: 24px;
-    margin-bottom: 10px;
+    color: var(--color3);
+    top: 15px;
+    left: 20px;
 }
 
-p {
+/* Estilos para la descripción (p) */
+.weather-card .description {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     font-size: 18px;
-    margin: 8px 0;
+    color: var(--color3);
+    margin: 10px 20px;
+    position: absolute;
+    bottom: 30%; /* Ajusta la distancia desde la parte inferior */
+    left: 20px;
+}
+
+/* Estilos para la temperatura (p) */
+.weather-card .temperature {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--color3);
+    margin: 10px 20px;
+    position: absolute;
+    bottom: 15%; /* Ajusta la distancia desde la parte inferior */
+    left: 20px;
+}
+
+
+/* Estilos para los iconos de clima */
+.weather-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 15px;
+    right: 20px;
+    animation: weather-icon-move 5s ease-in-out infinite;
+}
+
+/* Clase de icono de clima predeterminado */
+.weather-icon.default-icon {
+    background-color: gray;
+}
+
+/* Clase de icono de sol */
+.weather-icon.sun {
+    background: var(--color4);
+    border-radius: 50%;
+    box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
+    animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
+}
+
+/* Clase de icono de nube */
+.weather-icon.cloud {
+    margin-right: 60px;
+    background: var(--color1);
+    border-radius: 20px;
+    width: 25px;
+    height: 25px;
+    box-shadow:
+        var(--color3) 24px -6px 0 2px,
+        var(--color3) 10px 5px 0 5px,
+        var(--color3) 30px 5px 0 2px,
+        var(--color3) 11px -8px 0 -3px,
+        var(--color3) 25px 11px 0 -1px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        border-radius: 10px;
+        background-color: transparent;
+        width: 4px;
+        height: 12px;
+        left: 0;
+        top: 31px;
+        transform: rotate(30deg);
+        animation: rain 800ms ease-in-out infinite alternate;
+    }
+}
+
+/* Nueva clase para el icono de lluvia ligera */
+.weather-icon.light-rain {
+    background: #2092A9; /* Color del icono de lluvia ligera */
+    border-radius: 50%;
+    box-shadow: rgba(32, 146, 169, 0.1) 0 0 0 4px;
+}
+
+/* Icono de lluvia ligera usando Font Awesome */
+.weather-icon.light-rain::before {
+    content: "\f740"; /* Código del icono de lluvia ligera en Font Awesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Color del icono */
+}
+
+
+
+@keyframes light {
+    from {
+        box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
+    }
+    to {
+        box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+    }
+}
+
+@keyframes rain {
+    from {
+        box-shadow:
+            var(--color5) 8px 0px,
+            var(--color5) 32px -6px,
+            var(--color5) 20px 0px;
+    }
+    to {
+        box-shadow:
+            var(--color5) 8px 6px,
+            var(--color5) 32px 0px,
+            var(--color5) 20px 6px;
+    }
+}
+
+@keyframes weather-icon-move {
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.05)
+    }
+    75% {
+        transform: scale(0.95)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+
+@keyframes title-appear {
+    from {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }

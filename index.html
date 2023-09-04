@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información del Clima</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 <body>
     <div class="container">
-        <div class="weather-card" id="weather-card">
-            <!-- datos del clima -->
+        <div class="weather-card">
+            <div class="weather-icon sun"></div>
+            <h2><span id="cityName"></span></h2>
+            <p class="description">Descripción: <span id="weatherDescription"></span></p>
+            <p class="temperature">Temperatura: <span id="temperature"></span>°C</p>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
