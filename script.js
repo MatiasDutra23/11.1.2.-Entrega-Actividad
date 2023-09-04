@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const apiKey = 'AQUI VA LA APIKEY';
+    const apiKey = '2a3d2f97b6ae7ee41823afe5ff7b33d9';
     const lat = -33.68272565799198; // LATITUD de mi localidad extraída de Google Maps
     const lon = -53.55610306188749; // LONGITUD de mi localidad extraída de Google Maps
   
