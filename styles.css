@@ -74,6 +74,22 @@ body {
     left: 20px;
 }
 
+/* Modificar para hacer las palabras "Descripción:" y "Temperatura:" en negrita */
+.weather-card .description::before,
+.weather-card .temperature::before {
+    font-weight: 700; /* Cambiar a negrita */
+    content: attr(data-label); /* Utilizar el contenido del atributo "data-label" como el texto antes de los valores */
+}
+
+/* Modificar los elementos span dentro de la tarjeta de clima */
+.weather-card h2 span,
+.weather-card .description span,
+.weather-card .temperature span {
+    font-weight: 700;
+    color: var(--color4);
+    font-size: 20px;
+    text-transform: none;
+}
 
 /* Estilos para los iconos de clima */
 .weather-icon {
@@ -145,8 +161,6 @@ body {
     transform: translate(-50%, -50%);
     color: white; /* Color del icono */
 }
-
-
 
 @keyframes light {
     from {

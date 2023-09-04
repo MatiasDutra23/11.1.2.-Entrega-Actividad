@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
       weatherDescriptionElement.textContent = weatherDescription;
       temperatureElement.textContent = temperatureCelsius.toFixed(2);
 
-      // Asigna una clase de icono de clima según la descripción del clima
+     // Remover todas las clases de icono de clima del elemento
+weatherIconElement.classList.remove('sun', 'cloud', 'light-rain', 'default-icon');
+
+// Asigna una clase de icono de clima según la descripción del clima
 if (weatherDescription.toLowerCase().includes('clear')) {
   weatherIconElement.classList.add('sun'); // Icono de sol
 } else if (weatherDescription.toLowerCase().includes('cloud')) {
