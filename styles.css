@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0; /* Color de fondo */
+}
+
+.container {
+    text-align: center;
+}
+
+.weather-card {
+    background-color: #fff; /* Color de fondo de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px; /* Ancho máximo de la tarjeta */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin: 8px 0;
+}
